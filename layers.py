@@ -38,9 +38,9 @@ class GraphAttentionLayer(nn.Module):
         else:
             return h_prime
 
-    def _prepare_attentional_mechanism_input(self, Wh):           #用于计算俩俩之前的attention
-        # Wh.shape (N, out_feature)
-        # self.a.shape (2 * out_feature, 1)
+    def _prepare_attentional_mechanism_input(self, Wh):           #用于计算俩俩之前的attention。计算attention方式是2个向量先concat成2d，再用2d的向量做内积变成1维。左边的方法为：
+        # Wh.shape (N, out_feature)                               #N*d乘以d*1变成N*1。再N*d乘以另一个d*1变成N*1，并转置为1*N。N*1和1*N相加，相当于2个向量不要做concat，分别跟
+        # self.a.shape (2 * out_feature, 1)                       #d维向量做内积，再加起来。
         # Wh1&2.shape (N, 1)
         # e.shape (N, N)
         Wh1 = torch.matmul(Wh, self.a[:self.out_features, :])

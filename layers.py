@@ -38,7 +38,7 @@ class GraphAttentionLayer(nn.Module):
         else:
             return h_prime
 
-    def _prepare_attentional_mechanism_input(self, Wh):
+    def _prepare_attentional_mechanism_input(self, Wh):           #用于计算俩俩之前的attention
         # Wh.shape (N, out_feature)
         # self.a.shape (2 * out_feature, 1)
         # Wh1&2.shape (N, 1)
